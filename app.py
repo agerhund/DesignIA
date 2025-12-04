@@ -5,7 +5,7 @@ from PIL import Image
 import os
 
 # Importar la lógica principal del proyecto
-import logic as logic
+import logic
 
 # --- CONFIGURACIÓN INICIAL DE LA PÁGINA ---
 st.set_page_config(page_title="DesignIA - Recomendador de Muebles inteligente", layout="wide")
@@ -75,6 +75,33 @@ with st.sidebar:
             st.success("HorizonNet: Conectado")
         else:
             st.error("HorizonNet: No encontrado")
+
+    # Sección de Ejemplos
+    st.markdown("---")
+    st.subheader("📸 Imágenes de Ejemplo")
+    st.caption("Descarga estas imágenes para probar la app:")
+    
+    examples_dir = os.path.join(os.path.dirname(__file__), "examples")
+    if os.path.exists(examples_dir):
+        example_files = [f for f in os.listdir(examples_dir) if f.endswith(('.jpg', '.png'))]
+        example_files.sort()
+        
+        selected_example = st.selectbox("Selecciona un ejemplo:", example_files)
+        
+        if selected_example:
+            file_path = os.path.join(examples_dir, selected_example)
+            with open(file_path, "rb") as file:
+                btn = st.download_button(
+                    label="⬇️ Descargar Imagen",
+                    data=file,
+                    file_name=selected_example,
+                    mime="image/jpeg"
+                )
+            
+            # Mostrar miniatura
+            st.image(file_path, caption="Vista previa", use_container_width=True)
+    else:
+        st.info("No hay ejemplos disponibles.")
 
 # --- INICIALIZACIÓN DEL ESTADO DE SESIÓN ---
 if 'stage' not in st.session_state: st.session_state.stage = 0
