@@ -3,6 +3,7 @@ pandas
 numpy
 Pillow
 torch
+torchvision
 transformers
 scikit-learn
 matplotlib
