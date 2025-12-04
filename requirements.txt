@@ -1,0 +1,14 @@
+streamlit
+pandas
+numpy
+Pillow
+torch
+transformers
+scikit-learn
+matplotlib
+shapely
+tqdm
+plotly
+pywavefront
+scipy
+opencv-python-headless
